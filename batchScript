@@ -1,0 +1,18 @@
+#!/bin/sh
+#SBATCH -N 2
+#SBATCH -J partUnitTest
+#SBATCH -t 2:00:00
+#SBATCH -A apooarm@stria-login1
+#SBATCH -p short
+
+echo "Starting :: Partitions Comm Unit Test"
+
+j=${SLURM_JOBID}
+echo "JobID : $j"
+date +"%F_%T"
+
+if not exist "%results%" mkdir "%results%"
+
+mpiexec -np 2 ./test/partComm >> results/ut_part_test.txt
+
+date +"%F_%T"
